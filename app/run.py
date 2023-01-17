@@ -26,11 +26,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
+df = pd.read_sql('DisasterMessages', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -42,6 +42,18 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+    
+    # what are the frequencies of the categories in the messages
+    categories = df.drop(['id', 'message', 'original', 'genre'], axis = 1)
+    categories_percentage = categories.sum()/len(df)
+    categories_percentage_names = list(categories_percentage.index)
+   
+    # what are the absolut numbers of the categories in the messages
+    categories = df.drop(['id', 'message', 'original', 'genre'], axis = 1)
+    categories_absolut = categories.sum()
+    categories_absolut_names = list(categories_absolut.index)
+
+    
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -61,6 +73,42 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        }, 
+        {
+            'data': [
+                Bar(
+                    x = categories_percentage_names,
+                    y = categories_percentage
+                )
+            ],
+            
+            'layout': {
+                'title': 'Relative Share per Categories in the Messages',
+                'xaxis': {
+                    'title': 'Category'
+                },
+                'yaxis': {
+                    'title': 'Relative Share'
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x = categories_absolut_names,
+                    y = categories_absolut
+                )
+            ],
+            
+            'layout': {
+                'title': 'Absolut Number of Records per Category in the Messages',
+                'xaxis': {
+                    'title': 'Category'
+                },
+                'yaxis': {
+                    'title': 'Number of Records'
                 }
             }
         }
