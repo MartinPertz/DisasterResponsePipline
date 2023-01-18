@@ -34,7 +34,7 @@ The program code runs under Python 3.x. It requires the following Python librari
 4. Click the `PREVIEW` button to open the homepage
 
 ### File Descriptions
- The app folder includs the templates folder and "run.py" for the web application.
+The app folder includs the templates folder and "run.py" for the web application.
 
 The data folder includs "DisasterResponse.db", "disaster_categories.csv", "disaster_messages.csv" and "process_data.py" for data cleaning and transfering.
 
@@ -43,6 +43,8 @@ The models folder includs "classifier.pkl" and "train_classifier.py" for the Mac
 README.md file 
 
 Hint: Please ignore the objects "+(database_filepath)" and "DisasterResponse.db"
+
+You can find the code in my github repository [https://github.com/MartinPertz/DisasterResponsePipline](https://github.com/MartinPertz/DisasterResponsePipline)
 
 ### Acknowledgements
 Thanks to Figure Eight for providing the data for training purposes as part of this project. Also, special thanks to Udacity for the courseware and training.
